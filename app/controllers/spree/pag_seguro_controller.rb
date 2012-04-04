@@ -5,11 +5,10 @@ module Spree
     
     def notify
       notification = Spree::PaymentNotification.create_from_params(params)
-      
+      @order = Spree::Order.find(notification.id)
+      @order.next unless @order.completed?
       if notification.approved?
         Order.transaction do
-          @order = Spree::Order.find(notification.id)
-          
           # 1. Assume that if payment notification comes, it's exactly for the amount
           # sent to pagseguro (safe assumption -- cart can't be edited while on pagseguro)
           # 2. Can't use Order#total, as it's intercepted by spree-multi-currency

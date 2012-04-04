@@ -1,2 +1,6 @@
-<%= image_tag "pag_seguro_checkout.gif" %>
+<!-- INICIO CODIGO PAGSEGURO -->
+<center>
+<img alt='Logotipos de meios de pagamento do PagSeguro' src='https://p.simg.uol.com.br/out/pagseguro/i/banners/pagamento/todos_estatico_550_100.gif' title='Este site aceita pagamentos com Visa, MasterCard, Diners, American Express, Hipercard, Aura, Elo, PLENOCard, PersonalCard, BrasilCard, Bradesco, Itaú, Banco do Brasil, Banrisul, Banco HSBC, Oi Paggo, saldo em conta PagSeguro, boleto e PinCode PagSeguro.' border='0'>
+</center>
+<!-- FINAL CODIGO PAGSEGURO -->
 <%= hidden_field "payment_source[#{payment_method.id}]", 'order_id', value: @order.id %>
