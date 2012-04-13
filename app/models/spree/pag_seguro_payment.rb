@@ -13,10 +13,10 @@ module Spree
         Order.pag_seguro_payment_method.preferred_email,
         Order.pag_seguro_payment_method.preferred_token,
         redirect_url: redirect_url,
-        extra_amount: format("%.2f", payment.order.adjustments.debit.sum(:amount)),
+        extra_amount: format("%.2f", payment.order.adjustments.credit.sum(:amount)),
         id: order.id)
 
-      pag_seguro_payment.items = order_items + order_credits
+      pag_seguro_payment.items = order_items + order_charges
       # pag_seguro_payment.items << order_items
       # pag_seguro_payment.items << order_credits
 
@@ -40,8 +40,8 @@ module Spree
       end
     end
     
-    def order_credits
-      payment.order.adjustments.credit.map do |item|
+    def order_charges
+      payment.order.adjustments.positive_charge.map do |item|
         pag_seguro_item = ::PagSeguro::Item.new
         pag_seguro_item.id = item.id
         pag_seguro_item.description = item.label
