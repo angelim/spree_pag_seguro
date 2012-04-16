@@ -17,11 +17,22 @@ module Spree
         id: order.id)
 
       pag_seguro_payment.items = order_items + order_charges
-      # pag_seguro_payment.items << order_items
-      # pag_seguro_payment.items << order_credits
 
-      pag_seguro_payment.sender = ::PagSeguro::Sender.new(name: order.name, email: order.email, phone_number: order.ship_address.phone, phone_ddd: order.ship_address.ddd )
-      pag_seguro_payment.shipping = ::PagSeguro::Shipping.new(type: ::PagSeguro::Shipping::UNIDENTIFIED, state: order.ship_address.state.abbr, city: order.ship_address.city, postal_code: order.ship_address.zipcode, street: order.ship_address.address1, number: order.ship_address.number, complement: order.ship_address.address2)
+      pag_seguro_payment.sender   = ::PagSeguro::Sender.new(
+                                    name: order.name, 
+                                    email: order.email, 
+                                    phone_number: order.ship_address.phone, 
+                                    phone_ddd: order.ship_address.ddd )
+                                    
+      pag_seguro_payment.shipping = ::PagSeguro::Shipping.new(
+                                    type: ::PagSeguro::Shipping::UNIDENTIFIED, 
+                                    state: order.ship_address.state.abbr, 
+                                    city: order.ship_address.city, 
+                                    postal_code: order.ship_address.zipcode, 
+                                    street: order.ship_address.address1, 
+                                    number: order.ship_address.number, 
+                                    complement: order.ship_address.address2, 
+                                    district: order.ship_address.neighborhood )
       self.code = pag_seguro_payment.code
       self.date = pag_seguro_payment.date
       self.save
