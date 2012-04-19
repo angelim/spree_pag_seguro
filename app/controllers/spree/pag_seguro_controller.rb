@@ -6,7 +6,6 @@ module Spree
     def notify
       notification = Spree::PaymentNotification.create_from_params(params)
       @order = Spree::Order.find(notification.id)
-      @order.next unless @order.completed?
       if notification.approved?
         Order.transaction do
           # 1. Assume that if payment notification comes, it's exactly for the amount

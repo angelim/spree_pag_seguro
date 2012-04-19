@@ -3,5 +3,6 @@
     Seu pagamento foi aprovado pelo PagSeguro através da transação de código: <%= @order.payment_notifications.last.transaction_id if @order.payment_notifications.present? %>
   <% else %>
 		Aguardando liberação de pagamento pelo PagSeguro.
+		<%= link_to t("check_out_with_pag_seguro"), PagSeguro::Payment.checkout_payment_url(@order.payment.source.code), :class => 'continue btn btn-primary' %>
   <% end %>
 <% end %>
