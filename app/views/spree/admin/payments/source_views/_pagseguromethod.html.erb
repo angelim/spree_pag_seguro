@@ -16,8 +16,25 @@
 		<% end %>
       </td>
       <td><%= l payment.source.date %></td>
-	  <td><%= link_to PagSeguro::Payment.checkout_payment_url(payment.source.code) %></td>
+	  <td><%= text_with_clippy PagSeguro::Payment.checkout_payment_url(payment.source.code) %></td>
     </tr>
+  </table>
+
+  <table class="index">
+    <tr>
+      <th><%= Spree::PaymentNotification.human_attribute_name :params %></th>
+      <th><%= Spree::PaymentNotification.human_attribute_name :status %></th>
+      <th><%= Spree::PaymentNotification.human_attribute_name :transaction_id %></th>
+      <th><%= Spree::PaymentNotification.human_attribute_name :notification_code %></th>
+    </tr>
+		<% payment.order.payment_notifications.each do |notification| %>
+			<tr>
+	      <td><%= notification.params %></td>
+	      <td><%= notification.status %></td>
+	      <td><%= notification.transaction_id %></td>
+	      <td><%= notification.notification_code %></td>
+			</tr>
+		<% end %>
   </table>
 </fieldset>
 

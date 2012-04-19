@@ -8,3 +8,9 @@ pt-BR:
   check_out_with_pag_seguro: "Compre com o PagSeguro"
   pag_seguro_payment_received: "Obrigado. Nós recebemos seu pagamento para a órdem de compra. Sua compra será entregue em breve."
   pag_seguro_order_processed_successfully: "Obrigado. Sua compra foi processada com sucesso. Você será notificado assim que recebermos o comprovante de pagamento do PagSeguro"
+  activerecord:
+    attributes:
+      spree/payment_notification:
+        transation_id: Código de Transação no Pagseguro
+        params: Parâmetros
+        notification_code: Código
